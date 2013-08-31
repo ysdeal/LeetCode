@@ -14,7 +14,7 @@ public:
                 te = 1;
             }else{
                 digits[i] += te;
-                te=0;
+                return digits;
             }
         }
         if (te==1)
