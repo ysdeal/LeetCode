@@ -3,24 +3,22 @@ public:
     vector<int> plusOne(vector<int> &digits) {
         // Start typing your C/C++ solution below
         // DO NOT write int main() function
-        vector<int> out;
-        if(digits.size()==0){out.push_back(1);return out;}
+        if(digits.size()==0){digits.push_back(1);return digits;}
         
         int te=1;
-        out = digits;
-        for(int i=out.size()-1;i>=0;i--)
+        for(int i=digits.size()-1;i>=0;i--)
         {
-            if(out[i]+te==10)
+            if(digits[i]+te==10)
             {
-                out[i]=0;
+                digits[i]=0;
                 te = 1;
             }else{
-                out[i] += te;
+                digits[i] += te;
                 te=0;
             }
         }
         if (te==1)
-          out.insert(out.begin(),1);
-        return out;
+          digits.insert(digits.begin(),1);
+        return digits;
     }
 };
