@@ -27,7 +27,7 @@ private:
    TreeNode *buildBT(vector<int> &preorder, vector<int> &inorder, 
              int pos, int start, int end){
         if(start > end) return NULL;
-        int j = std::find(inorder.begin()+start, inorder.end()+end,
+        int j = std::find(inorder.begin()+start, inorder.begin()+end,
                 preorder[pos]) - inorder.begin();
         TreeNode *root = new TreeNode(preorder[pos]);
         root->left = buildBT(preorder,inorder,pos+1,start, j-1);
