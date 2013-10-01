@@ -43,7 +43,7 @@ public:
     }
 };
 
-/* a neat solution */
+/* a neat solution : From bottom to up, very smart*/
 class Solution {
 public:
     int minimumTotal(vector<vector<int> > &triangle) {
