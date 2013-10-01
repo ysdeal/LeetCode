@@ -42,3 +42,18 @@ public:
         return mv;
     }
 };
+
+/* a neat solution */
+class Solution {
+public:
+    int minimumTotal(vector<vector<int> > &triangle) {
+
+
+    int n = triangle.size();
+    vector<int> p (n+1, 0);
+    while(n-- > 0)
+        for(int i = 0; i <= n; ++i) 
+            p[i] = triangle[n][i] + ((p[i] < p[i+1])? p[i] : p[i+1]);
+    return p[0];
+  }
+};
