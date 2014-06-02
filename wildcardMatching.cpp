@@ -29,6 +29,7 @@ bool isMatch(const char *s, const char *p){
     const char* star = NULL;
     const char* ss = s;
     while(*s){
+    	cout << *p << " " << *s <<endl;
     	if(*p == '?' || *p == *s){
     		s++;
     		p++;
@@ -37,9 +38,11 @@ bool isMatch(const char *s, const char *p){
     	if(*p == '*'){
     		star = p++;
     		ss = s;
+    		cout << "star appears" << endl;
     		continue;
     	}
     	if(star){
+    		cout << "move back" << endl;
     		p = star + 1;
     		s = ++ss;
             continue;
@@ -53,11 +56,16 @@ bool isMatch(const char *s, const char *p){
 
 int main(int argc, char const *argv[])
 {
-	char s[] = "abc";
-	char p[] = "?*";
+	//char s[] = "abdefeabc";
+	char s[] = "aa";
+	char p[] = "a";
 	if (isMatch(s,p))
 		cout << "Matched" << endl;
 	else
 		cout << "Not Matched" << endl;
+	int i = 0;
+	int b = ++i;
+	int c = i++;
+	cout << b << " " << i << " " << c << endl;
 	return 0;
 }
