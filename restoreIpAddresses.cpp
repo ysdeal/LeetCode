@@ -61,10 +61,6 @@ vector<string> restoreIpAddresses(string s){
 	if (s.size() > 12 || s.size() == 0)
 	   return res;
 
-	if(s.size() == 12){
-		res.push_back(s);
-		return res;
-	}
     string rIp;
     int brk = 0;
     helper(s, rIp, 0, brk,res);
