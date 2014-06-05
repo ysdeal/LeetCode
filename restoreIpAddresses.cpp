@@ -40,24 +40,7 @@ void helper(string s, string rIp, int st, int brk, vector<string> &res){
 }
 
 vector<string> restoreIpAddresses(string s){
-	int p = 0;
-	int d = s.size();
 	vector<string> res;
-	for(int i = 0; i < s.size(); ++i)
-		if(s[i] == '0' || s[i] == ' ')
-			p++;
-		else
-			break;
-			
-
-	for(int i = s.size() - 1; i >=p; --i)
-		if(s[i] == ' ')
-			d--;
-        else
-        	break;
-			
-	s = s.substr(p,d - p);
-
 	if (s.size() > 12 || s.size() == 0)
 	   return res;
 
@@ -69,7 +52,7 @@ vector<string> restoreIpAddresses(string s){
 
 int main(int argc, char const *argv[])
 {
-	string s = "             11121234                ";
+	string s = "0000";
 	vector<string> rs = restoreIpAddresses(s);
 	for(auto &x : rs)
 	cout << x <<endl;
