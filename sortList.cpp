@@ -10,18 +10,8 @@ Sort a linked list in O(n log n) time using constant space complexity.
  * };
  */
 
-#include <algorithm>
-#include <vector>
-#include <string>
-#include <iostream>
-#include <climits>
+#include "ulti.h"
 using namespace std;
-
-struct ListNode{
-	int val;
-	ListNode *next;
-	ListNode(int x): val(x), next(NULL) {};
-};
 
 // merge
 ListNode *merge(ListNode *left, ListNode *right){
@@ -68,28 +58,6 @@ ListNode *sortList(ListNode *head){
     return sort(head,len);
 }
 
-ListNode *constructList(vector<int> v){
-    int len = v.size();
-    if(len == 0) return NULL;
-    ListNode dummp(0);
-    ListNode *head = new ListNode(v[0]);
-    dummp.next = head;
-    for(int i = 1; i < len; ++i){
-    	ListNode *p = new ListNode(v[i]);
-    	head->next = p;
-    	head = head->next;
-    }
-    return dummp.next;
-}
-
-void freeList(ListNode *head){
-	while(head){
-		ListNode *it = head->next;
-		delete[] head;
-        head = it;
-	}
-}
-
 int main(int argc, char const *argv[])
 {
 	vector<int> ary = {5,2,3,4,5,8,10,1,9};
@@ -100,7 +68,8 @@ int main(int argc, char const *argv[])
     	cout << tp->val << " ";
     	tp = tp->next;
     }
-    ListNode *sp = sortList(head);
+
+    ListNode *sp = sortList(head);    
     cout << "\nSorted List\n";
     while(sp){
     	cout << sp->val << " ";
