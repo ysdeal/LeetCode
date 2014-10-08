@@ -1,6 +1,7 @@
 #include <iostream>
 #include <unordered_map>
 #include <string>
+#include <vector>
 
 using namespace std;
 
@@ -14,6 +15,7 @@ class Trie{
 private:
 	TrieNode *root;
 	bool deleteWordUtil(string s, TrieNode *r, int cur);
+	void autoCompleteUtil(TrieNode *r, string &sol, vector<string> &res);
 public:
 	Trie():root(new TrieNode()){}
 	~Trie(){deleteTrie(root);}
@@ -21,7 +23,7 @@ public:
 	bool searchWord(string s);
 	void deleteWord(string s);
 	void deleteTrie(TrieNode *root);
-
+    vector<string> autoComplete(string s);
     //To avoid shallow copy, you may need to give
     //copy constructor and overload assignment operator
     Trie(const Trie&);
@@ -97,6 +99,36 @@ void Trie::deleteTrie(TrieNode *r){
 	r = nullptr;
 }
 
+vector<string> Trie::autoComplete(string s){
+    vector<string> res;
+    if(this->root == nullptr)
+        return res;
+    TrieNode *cur = this->root;
+    for(auto x : s){
+    	if(cur->children.count(x) == 0)
+    		return res;
+    	cur = cur->children[x];
+    }
+    string sol = s;
+    autoCompleteUtil(cur, sol, res);
+    return res;
+}
+
+void Trie::autoCompleteUtil(TrieNode *r, string &sol, vector<string> &res){
+    if(r == nullptr)
+    	return;
+    if(r->leaf == true)
+    	res.push_back(sol);
+
+    int len = sol.size();
+    for(auto it = r->children.begin(); it != r->children.end(); ++it){
+    	sol.append(1, it->first);
+    	autoCompleteUtil(it->second, sol, res);
+    	sol.resize(len);
+    }
+
+}
+
 int main(int argc, char const *argv[])
 {
 	Trie t = Trie();
@@ -128,6 +160,16 @@ int main(int argc, char const *argv[])
     t.deleteWord("");
     if (t.searchWord(""))
         cout << "Found empty string" << endl;
+
+    cout << "Test Auto Complete..................." <<endl;
+    t.addWord("Balloon");
+    t.addWord("Ballz");
+    t.addWord("Ballabc");
+    t.addWord("Balzabc");
+    t.addWord("BalloonHaHa");
+    vector<string> dict = t.autoComplete("Ball");
+    for(auto x : dict)
+    	cout << x << " ";
+    cout << endl;
     return 0;
-	return 0;
 }
